@@ -25,7 +25,11 @@ const profileSchema = new mongoose.Schema({
 
 // Create a Profile model
 const Profile = mongoose.model('Profile', profileSchema);
-
+const profile = [
+    {
+        name:''
+    }
+]
 
  const data = [
     {
@@ -109,9 +113,9 @@ app.get('/data',(req,res)=>{
 
 
 app.post('/searchEngine/:query', async (req,res)=>{
-    const newId = req.params.query;
+    const query = req.params.query;
     // Find profile by ID
-    const profile = await Profile.find({ name : newId })
+    const profile = await Profile.find({ name : query })
     res.send(profile??'Not Found');
 }) 
 
