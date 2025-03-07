@@ -25,82 +25,87 @@ const profileSchema = new mongoose.Schema({
 
 // Create a Profile model
 const Profile = mongoose.model('Profile', profileSchema);
-const profile = [
-    {
-        name:''
-    }
-]
+// const profile = [
+//     {
+//         "id":1,
+//         "name":"",
+//         "desc":"",
+//         "link":""
+//     }
+// ]
 
- const data = [
-    {
-        "id" : 1,
-        "name" : "Saad",
-        "address" : {
-            "city" : "Mumbra",
-            "state" : "Maha"
-        },
-        "images" : [
-            "img1",
-            "img2"
-        ],
-        "imagesWithKey" : [
-            {
-                "path" : "/image/",
-                "name" : "img1"
-            },
-            {
-                "path" : "/image/",
-                "name" : "img2"
-            }
-        ]
-    },
-    {
-        id : 2,
-        name : 'basheer',
-        address : {
-            city : 'Mumbra',
-            state : 'Maha'
-        },
-        images : [
-            'img1',
-            'img2'
-        ],
-        imagesWithKey : [
-            {
-                path : '/image/',
-                name : 'img2'
-            },
-            {
-                path : '/image/',
-                name : 'img1'
-            }
-        ]
-    },
-    {
-        id : 3,
-        name : 'prince',
-        address : {
-            city : 'Mumbra',
-            state : 'Maha'
-        },
-        images : [
-            'img1',
-            'img2'
-        ],
-        imagesWithKey : [
-            {
-                path : '/image/',
-                name : 'img3'
-            },
-            {
-                path : '/image/',
-                name : 'img4'
-            }
-        ]
-    }
-]
+//  const data = [
+//     {
+//         "id" : 1,
+//         "name" : "Saad",
+//         "address" : {
+//             "city" : "Mumbra",
+//             "state" : "Maha"
+//         },
+//         "images" : [
+//             "img1",
+//             "img2"
+//         ],
+//         "imagesWithKey" : [
+//             {
+//                 "path" : "/image/",
+//                 "name" : "img1"
+//             },
+//             {
+//                 "path" : "/image/",
+//                 "name" : "img2"
+//             }
+//         ]
+//     },
+//     {
+//         id : 2,
+//         name : 'basheer',
+//         address : {
+//             city : 'Mumbra',
+//             state : 'Maha'
+//         },
+//         images : [
+//             'img1',
+//             'img2'
+//         ],
+//         imagesWithKey : [
+//             {
+//                 path : '/image/',
+//                 name : 'img2'
+//             },
+//             {
+//                 path : '/image/',
+//                 name : 'img1'
+//             }
+//         ]
+//     },
+//     {
+//         id : 3,
+//         name : 'prince',
+//         address : {
+//             city : 'Mumbra',
+//             state : 'Maha'
+//         },
+//         images : [
+//             'img1',
+//             'img2'
+//         ],
+//         imagesWithKey : [
+//             {
+//                 path : '/image/',
+//                 name : 'img3'
+//             },
+//             {
+//                 path : '/image/',
+//                 name : 'img4'
+//             }
+//         ]
+//     }
+// ]
 
 // '/' user kis naam se server access krenga uske liya slash daalte hai access
+
+
 app.get('/', async (req,res)=>{
     const profiles = await Profile.find(); // Fetch all profiles from the database
     res.send(profiles)
