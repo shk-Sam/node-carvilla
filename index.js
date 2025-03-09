@@ -20,88 +20,13 @@ const profileSchema = new mongoose.Schema({
     id: Number,
     name: String,
     desc: String,
-    link: String
+    link: String,
+    type: String,
 });
 
 // Create a Profile model
 const Profile = mongoose.model('Profile', profileSchema);
-// const profile = [
-//     {
-//         "id":1,
-//         "name":"",
-//         "desc":"",
-//         "link":""
-//     }
-// ]
 
-//  const data = [
-//     {
-//         "id" : 1,
-//         "name" : "Saad",
-//         "address" : {
-//             "city" : "Mumbra",
-//             "state" : "Maha"
-//         },
-//         "images" : [
-//             "img1",
-//             "img2"
-//         ],
-//         "imagesWithKey" : [
-//             {
-//                 "path" : "/image/",
-//                 "name" : "img1"
-//             },
-//             {
-//                 "path" : "/image/",
-//                 "name" : "img2"
-//             }
-//         ]
-//     },
-//     {
-//         id : 2,
-//         name : 'basheer',
-//         address : {
-//             city : 'Mumbra',
-//             state : 'Maha'
-//         },
-//         images : [
-//             'img1',
-//             'img2'
-//         ],
-//         imagesWithKey : [
-//             {
-//                 path : '/image/',
-//                 name : 'img2'
-//             },
-//             {
-//                 path : '/image/',
-//                 name : 'img1'
-//             }
-//         ]
-//     },
-//     {
-//         id : 3,
-//         name : 'prince',
-//         address : {
-//             city : 'Mumbra',
-//             state : 'Maha'
-//         },
-//         images : [
-//             'img1',
-//             'img2'
-//         ],
-//         imagesWithKey : [
-//             {
-//                 path : '/image/',
-//                 name : 'img3'
-//             },
-//             {
-//                 path : '/image/',
-//                 name : 'img4'
-//             }
-//         ]
-//     }
-// ]
 
 // '/' user kis naam se server access krenga uske liya slash daalte hai access
 
@@ -143,11 +68,25 @@ app.get('/home' , (req,res) => {
 
 // get all profile 
 
-app.get('/profiles', async (req,res)=>{
-    const profiles = await Profile.find(); // Fetch all profiles from the database
-    // console.log(profiles)
-    res.send(profiles.length !==  0 ? profiles : [])
-})
+// app.get('/profiles', async (req,res)=>{
+//     const profiles = await Profile.find(); // Fetch all profiles from the database
+//     // console.log(profiles)
+//     res.send(profiles.length !==  0 ? profiles : [])
+// })
+
+app.get('/profiles', async (req, res) => {
+    const { type } = req.query; // Get 'type' from the query parameters
+
+    let profiles;
+    if (type) {
+        profiles = await Profile.find({ type }); // Filter based on type (service/featured)
+    } else {
+        profiles = await Profile.find(); // Fetch all if no type is specified
+    }
+
+    res.send(profiles.length !== 0 ? profiles : []);
+});
+
 
 // params dynamic cheezo ke data ko store krke rkh ta hai
 
