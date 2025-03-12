@@ -42,12 +42,23 @@ app.get('/data',(req,res)=>{
 })
 
 
-app.post('/searchEngine/:query', async (req,res)=>{
-    const query = req.params.query;
-    // Find profile by ID
-    const profile = await Profile.find({ name : query })
-    res.send(profile??'Not Found');
-}) 
+app.post('/searchEngine', async (req, res) => {
+    const { query } = req.body; // Get query from request body
+
+    try {
+        const profile = await Profile.find({ name: { $regex: query, $options: "i" } });
+
+        if (profile.length === 0) {
+            return res.status(404).json({ message: "No results found" });
+        }
+
+        res.json(profile); // Return found profiles
+    } catch (error) {
+        console.error("Error searching:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 
 
 app.get('/home' , (req,res) => {
